@@ -1,0 +1,25 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.khan.pandachat.fragments.ChatFragment">
+
+    <TextView
+        android:id="@+id/label_fragment_chat_incoming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/input_fragment_chat_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/input_fragment_chat_message"/>
+
+    <Button
+        android:id="@+id/action_fragment_chat_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_fragment_chat_send"/>
+
+</FrameLayout>
