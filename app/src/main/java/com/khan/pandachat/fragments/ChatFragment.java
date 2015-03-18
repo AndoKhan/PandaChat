@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.khan.pandachat.Constants;
 import com.khan.pandachat.R;
 
 public class ChatFragment extends BaseFragment {
@@ -41,7 +42,13 @@ public class ChatFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        init();
         initView(view);
+    }
+
+    private void init() {
+        Bundle args = getArguments();
+        String deviceAddress = args.getString(Constants.DEVICE_ADDRESS);
     }
 
     private void initView(View root) {

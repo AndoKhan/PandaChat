@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -14,17 +15,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
+import com.khan.pandachat.Constants;
 import com.khan.pandachat.R;
+import com.khan.pandachat.fragments.ChatFragment;
 import com.khan.pandachat.fragments.DevicesListFragment;
 import com.khan.pandachat.modul.Device;
 import com.khan.pandachat.receivers.WiFiDirectBroadcastReceiver;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -110,7 +110,26 @@ public class MainActivity extends ActionBarActivity {
         }
 
         mDevicesListFragment.updateDevices(devices);
+    }
 
+    public void connectToDevice(final String address) {
+        WifiP2pConfig config = new WifiP2pConfig();
+        config.deviceAddress = address;
+        mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+
+            @Override
+            public void onSuccess() {
+                ChatFragment chatFragment = new ChatFragment();
+                Bundle args = new Bundle();
+                args.putString(Constants.DEVICE_ADDRESS, address);
+                chatFragment.setArguments(args);
+                openFragment(chatFragment);
+            }
+
+            @Override
+            public void onFailure(int reason) {
+            }
+        });
     }
 
     @Override

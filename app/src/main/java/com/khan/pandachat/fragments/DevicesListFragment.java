@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.khan.pandachat.Constants;
 import com.khan.pandachat.R;
 import com.khan.pandachat.adapters.DevicesAdapter;
 import com.khan.pandachat.modul.Device;
@@ -14,6 +16,13 @@ import com.khan.pandachat.modul.Device;
 import java.util.List;
 
 public class DevicesListFragment extends BaseFragment {
+
+    private AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            mActivity.connectToDevice(mDevicesAdapter.getItem(position).getAddress());
+        }
+    };
 
     private DevicesAdapter mDevicesAdapter;
 
@@ -42,6 +51,7 @@ public class DevicesListFragment extends BaseFragment {
 
         ListView listView = (ListView) root.findViewById(R.id.list_fragment_devices);
         listView.setAdapter(mDevicesAdapter);
+        listView.setOnItemClickListener(mOnItemClickListener);
     }
 
     public void updateDevices(List<Device> devices) {
